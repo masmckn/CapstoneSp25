@@ -7,7 +7,7 @@ const cors = require('cors');
 app.use(cors())
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/public/login.html'); // Serve index.html from a 'public' directory
+    res.sendFile('login.html', { root: path.join(__dirname, '../public') }); // Serve index.html from a 'public' directory
 });  
 
 // Server activation
