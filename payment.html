@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make a Payment</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right,#f5900c,#f5900c);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+
+        /* Payment Container */
+        .payment-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            width: 400px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+            width: 100%;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: #444;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        input:focus, select:focus {
+            border-color: #2575fc;
+            outline: none;
+            box-shadow: 0 0 8px rgba(37, 117, 252, 0.5);
+        }
+
+        /* Payment Button */
+        .button-group {
+            margin-top: 20px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #28a745;
+            border: none;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #218838;
+            transform: scale(1.05);
+        }
+
+        /* Secure Payment Notice */
+        .secure-notice {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #666;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="payment-container">
+        <h2>Make a Payment</h2>
+        
+        <div class="input-group">
+            <label for="amount">Total Amount Due</label>
+            <input type="text" id="amount" name="amount" value="$1,250.00" readonly>
+        </div>
+
+        <div class="input-group">
+            <label for="payment-method">Payment Method</label>
+            <select id="payment-method" name="payment_method">
+                <option value="credit-card">Credit/Debit Card</option>
+                <option value="paypal">PayPal</option>
+                <option value="bank-transfer">Bank Transfer</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label for="card-number">Card Number</label>
+            <input type="text" id="card-number" name="card_number" placeholder="1234 5678 9012 3456" required>
+        </div>
+
+        <div class="input-group">
+            <label for="expiry">Expiry Date</label>
+            <input type="month" id="expiry" name="expiry" required>
+        </div>
+
+        <div class="input-group">
+            <label for="cvv">CVV</label>
+            <input type="password" id="cvv" name="cvv" placeholder="123" required>
+        </div>
+
+        <div class="button-group">
+            <button type="submit">Confirm Payment</button>
+        </div>
+
+        <p class="secure-notice">🔒 Secure Payment Processing</p>
+    </div>
+
+</body>
+</html>
