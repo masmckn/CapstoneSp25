@@ -7,8 +7,8 @@ const cors = require('cors');
 app.use(cors())
 
 app.get('/', (req, res) => {
-      res.sendFile('index.html')
-})
+    res.sendFile(__dirname + '/public/login.html'); // Serve index.html from a 'public' directory
+});  
 
 // Server activation
 const PORT = process.env.PORT || 3000;
