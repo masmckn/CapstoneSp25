@@ -1,172 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Dashboard</title>
-    <style>
-        /* General Styles */
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to right, #f5900c, #f5900c);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            text-align: center;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>User Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #f5900c,#f5900c);
+      margin: 0;
+      padding: 0;
+    }
 
-        /* Dashboard Container */
-        .dashboard-container {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 25px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            border-radius: 12px;
-            width: 450px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-        }
+    .dashboard-container {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 25px;
+      width: 90%;
+      max-width: 600px;
+      margin: 80px auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
 
-        h2 {
-            color: #333;
-            font-weight: bold;
-        }
+    h2 {
+      color: #333;
+      margin-bottom: 15px;
+    }
 
-        h3 {
-            color: #444;
-            margin-top: 20px;
-        }
+    .section {
+      background: #ffffff;
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
 
-        /* Sections */
-        .section {
-            background: #ffffff;
-            padding: 15px;
-            margin-top: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
+    .section h3 {
+      color: #444;
+      margin-bottom: 10px;
+    }
 
-        .section p {
-            font-size: 16px;
-            color: #555;
-        }
+    .section p {
+      font-size: 16px;
+      color: #555;
+      margin: 6px 0;
+    }
 
-        /* Buttons */
-        .pay-button, .support-button {
-            width: 100%;
-            padding: 12px;
-            margin-top: 10px;
-            border: none;
-            font-size: 16px;
-            font-weight: bold;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border: none;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+      text-decoration: none;
+      color: white;
+    }
 
-        .pay-button {
-            background: #007bff;
-            color: white;
-        }
+    .btn-blue {
+      background-color: #007bff;
+    }
 
-        .pay-button:hover {
-            background: #0056b3;
-            transform: scale(1.05);
-        }
+    .btn-blue:hover {
+      background-color: #0056b3;
+      transform: scale(1.05);
+    }
 
-        .support-button {
-            background: #ff5733;
-            color: white;
-        }
+    .btn-green {
+      background-color: #28a745;
+    }
 
-        .support-button:hover {
-            background: #c0392b;
-            transform: scale(1.05);
-        }
+    .btn-green:hover {
+      background-color: #218838;
+      transform: scale(1.05);
+    }
 
-        /* Table Styling */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
+    .btn-orange {
+      background-color: #ff9800;
+    }
 
-        table, th, td {
-            border: 1px solid #ddd;
-            text-align: center;
-        }
+    .btn-orange:hover {
+      background-color: #e67e22;
+      transform: scale(1.05);
+    }
 
-        th, td {
-            padding: 10px;
-        }
+    /* Hamburger Menu */
+    .menu-container {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+    }
 
-        th {
-            background-color: #007bff;
-            color: white;
-        }
+    .menu-icon {
+      font-size: 28px;
+      color: white;
+      cursor: pointer;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 10px;
+      border-radius: 8px;
+    }
 
-        td {
-            background-color: #f9f9f9;
-        }
-    </style>
+    .dropdown {
+      display: none;
+      position: absolute;
+      right: 0;
+      margin-top: 10px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0px 4px 12px rgba(0,0,0,0.2);
+      min-width: 150px;
+      z-index: 1;
+    }
+
+    .dropdown a {
+      display: block;
+      color: #333;
+      padding: 12px;
+      text-decoration: none;
+      border-bottom: 1px solid #eee;
+    }
+
+    .dropdown a:hover {
+      background-color: #f2f2f2;
+    }
+  </style>
 </head>
 <body>
 
-    <div class="dashboard-container">
-        <h2>Welcome, [User's Name]</h2>
-
-        <div class="section">
-            <h3>Account Summary</h3>
-            <p><strong>Account ID:</strong> 12345678</p>
-            <p><strong>Email:</strong> user@example.com</p>
-            <p><strong>Phone:</strong> +1 234 567 890</p>
-        </div>
-
-        <div class="section">
-            <h3>Billing Information</h3>
-            <p><strong>Total Due:</strong> $1,250.00</p>
-            <p><strong>Last Payment:</strong> $500.00 (March 5, 2025)</p>
-            <button class="pay-button">Make a Payment</button>
-        </div>
-
-        <div class="section">
-            <h3>Insurance Details</h3>
-            <p><strong>Provider:</strong> Blue Cross Insurance</p>
-            <p><strong>Policy Number:</strong> BC-987654321</p>
-            <p><strong>Coverage:</strong> 80% of eligible expenses</p>
-        </div>
-
-        <div class="section">
-            <h3>Transaction History</h3>
-            <table>
-                <tr>
-                    <th>Date</th>
-                    <th>Description</th>
-                    <th>Amount</th>
-                    <th>Status</th>
-                </tr>
-                <tr>
-                    <td>March 5, 2025</td>
-                    <td>Hospital Bill Payment</td>
-                    <td>$500.00</td>
-                    <td>Paid</td>
-                </tr>
-                <tr>
-                    <td>Feb 20, 2025</td>
-                    <td>Insurance Coverage</td>
-                    <td>$750.00</td>
-                    <td>Processed</td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="section">
-            <h3>Need Help?</h3>
-            <button class="support-button">Contact Support</button>
-        </div>
-
+  <!-- Hamburger Menu -->
+  <div class="menu-container">
+    <div class="menu-icon" onclick="toggleDropdown()">☰</div>
+    <div class="dropdown" id="menuDropdown">
+      <a href="profile.html">Profile / Settings</a>
     </div>
+  </div>
+
+  <!-- Dashboard Content -->
+  <div class="dashboard-container">
+    <h2>Welcome, Ashith</h2>
+
+    <div class="section">
+      <h3>Account Summary</h3>
+      <p><strong>Account ID:</strong> 12345678</p>
+      <p><strong>Email:</strong> ashith@example.com</p>
+      <p><strong>Phone:</strong> +1 234 567 890</p>
+    </div>
+
+    <div class="section">
+      <h3>Billing Information</h3>
+      <p><strong>Total Due:</strong> $1,250.00</p>
+      <p><strong>Last Payment:</strong> $500.00 (March 5, 2025)</p>
+      <a href="payment.html" class="btn btn-green">Make a Payment</a>
+      <a href="itemized-bill.html" class="btn btn-blue">View Itemized Hospital Bill</a>
+    </div>
+
+    <div class="section">
+      <h3>Insurance Details</h3>
+      <p><strong>Provider:</strong> Blue Cross Insurance</p>
+      <p><strong>Policy Number:</strong> BC-987654321</p>
+      <p><strong>Coverage:</strong> 80% of eligible expenses</p>
+    </div>
+
+    <div class="section">
+      <h3>Need Help?</h3>
+      <a href="support.html" class="btn btn-orange">Contact Support</a>
+    </div>
+  </div>
+
+  <!-- JavaScript to Toggle Menu -->
+  <script>
+    function toggleDropdown() {
+      const dropdown = document.getElementById("menuDropdown");
+      dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+    }
+
+    // Optional: Hide dropdown when clicking outside
+    window.onclick = function(event) {
+      if (!event.target.matches('.menu-icon')) {
+        const dropdown = document.getElementById("menuDropdown");
+        if (dropdown.style.display === "block") {
+          dropdown.style.display = "none";
+        }
+      }
+    };
+  </script>
 
 </body>
 </html>
