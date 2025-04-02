@@ -13,13 +13,16 @@ export default class Database {
 
   async connect() {
     try {
-      this.poolconnection = await sql.connect(this.config);
-      this.connected = true;
-      console.log('Database connected successfully.');
-      return this.poolconnection;
+      console.log(`Database connecting...${this.connected}`);
+      if (this.connected === false) {
+        this.poolconnection = await sql.connect(this.config);
+        this.connected = true;
+        console.log('Database connection successful');
+      } else {
+        console.log('Database already connected');
+      }
     } catch (error) {
-      console.error('Error connecting to the database:', error);
-      this.connected = false;
+      console.error(`Error connecting to database: ${JSON.stringify(error, Object.getOwnPropertyNames(error))}`);
     }
   }
 
@@ -29,6 +32,8 @@ export default class Database {
         await this.poolconnection.close();
         this.connected = false;
         console.log('Database disconnected successfully.');
+      } else {
+        console.log('Database already disconnected')
       }
     } catch (error) {
       console.error('Error disconnecting from the database:', error);
@@ -45,11 +50,11 @@ export default class Database {
   async create(data) {
     const request = this.poolconnection.request();
 
-    request.input('firstName', sql.NVarChar(255), data.firstName);
-    request.input('lastName', sql.NVarChar(255), data.lastName);
+    request.input('userid', sql.NVarChar(255), data.userid);
+    request.input('password', sql.NVarChar(255), data.password);
 
     const result = await request.query(
-      `INSERT INTO Person (firstName, lastName) VALUES (@firstName, @lastName)`
+      `INSERT INTO [User] (userid, pass) VALUES (@firstName, @lastName)`
     );
 
     return result.rowsAffected[0];
@@ -95,33 +100,10 @@ export default class Database {
 
     return result.rowsAffected[0];
   }
-
-  async createTable() {
-    if (process.env.NODE_ENV === 'development') {
-      this.executeQuery(
-        `IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Person')
-         BEGIN
-           CREATE TABLE Person (
-             id int NOT NULL IDENTITY, 
-             firstName varchar(255), 
-             lastName varchar(255)
-           );
-         END`
-      )
-        .then(() => {
-          console.log('Table created');
-        })
-        .catch((err) => {
-          // Table may already exist
-          console.error(`Error creating table: ${err}`);
-        });
-    }
-  }
 }
 
-export const createDatabaseConnection = async (passwordConfig) => {
-  database = new Database(passwordConfig);
+export const createDatabaseConnection = async (config) => {
+  database = new Database(config);
   await database.connect();
-  await database.createTable();
   return database;
 };

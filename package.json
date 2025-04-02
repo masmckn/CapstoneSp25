@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "The only one-stop-shop for medical billing.",
   "main": "home-script.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,9 +18,11 @@
   },
   "homepage": "https://github.com/masmckn/CapstoneSp25#readme",
   "dependencies": {
+    "body-parser": "^2.2.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
-    "mssql": "^11.0.1"
+    "mssql": "^11.0.1",
+    "path": "^0.12.7"
   }
 }
