@@ -5,10 +5,8 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-if(process.env.NODE_ENV.trim() === 'development') {
-  const pathString = path.join(__dirname, '..', '.env.development')
-  dotenv.config({ path: path.join(__dirname, '..', '.env.development'), debug: true });
-}
+const pathString = path.join(__dirname, '..', '.env.development')
+dotenv.config({ path: path.join(__dirname, '..', '.env.development'), debug: true });
 
 
 const server = process.env.AZURE_SQL_SERVER;

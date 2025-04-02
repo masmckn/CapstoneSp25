@@ -31,7 +31,20 @@ router.post('/dashboard.html', async (req, res) => {
     const user = req.body;
     console.log(`user: ${JSON.stringify(user)}`);
     const result = await database.executeQuery('SELECT * FROM [User] WHERE UserID = $1', [req.body.userid]);
-    res.status(201).json({ result });
+    if(result.result){
+      console.log('UserID found in database.');
+      //check password goes here
+      const passResult = 1;
+      if(passResult){
+        res.sendFile('dashboard.html', { root: path.join(__dirname, '../') });
+      }
+      else{
+        res.send('Wrong UserID or password. Please try again.')
+      }
+    }
+    else{
+      res.send('Wrong UserID or password. Please try again.')
+    }
   } catch (err) {
     res.status(500).json({ error: err?.message });
   }
