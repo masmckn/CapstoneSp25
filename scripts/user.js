@@ -1,6 +1,11 @@
 import express from 'express';
 import config from './config.js';
 import { createDatabaseConnection } from './database.js';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const router = express.Router();
 router.use(express.json());
@@ -26,24 +31,39 @@ router.get('/', async (req, res) => {
   }*/
 });
 
-router.post('/dashboard.html', async (req, res) => {
+router.post('/dashboard(.html)?', async (req, res) => {
   try {
-    const user = req.body;
-    console.log(`user: ${JSON.stringify(user)}`);
-    const result = await database.executeQuery('SELECT * FROM [User] WHERE UserID = $1', [req.body.userid]);
-    if(result.result){
-      console.log('UserID found in database.');
-      //check password goes here
-      const passResult = 1;
-      if(passResult){
-        res.sendFile('dashboard.html', { root: path.join(__dirname, '../') });
+    const params = Object.keys(req.body);
+    console.log('About to evaluate if statement.');
+    if(params.includes('first_name')){
+      console.log('New user.');
+      const newUser = req.body;
+      console.log(`newUser: ${JSON.stringify(newUser)}`);
+      const result = await database.executeQuery(
+        `INSERT INTO [User] (UserID, FirstName, LastName, Email, PassHash) VALUES
+        (\'${newUser.username}\', \'${newUser.first_name}\', \'${newUser.last_name}\', \'${newUser.email}\', \'${newUser.password}\')`);
+      console.log('Query executed.');
+      res.sendFile('login.html', { root: path.join(__dirname, '../public') });
+    }
+    else {
+      const user = req.body;
+      console.log(`user: ${JSON.stringify(user)}`);
+      const result = await database.executeQuery(`SELECT * FROM [User] WHERE UserID = \'${user.userid}\'`);
+      console.log(`result: ${JSON.stringify(result)}`)
+      if(result){
+        console.log('UserID found in database.');
+        //check password goes here
+        const passResult = 1;
+        if(passResult){
+          res.sendFile('dashboard.html', { root: path.join(__dirname, '../') });
+        }
+        else{
+          res.send('Wrong UserID or password. Please try again.')
+        }
       }
       else{
         res.send('Wrong UserID or password. Please try again.')
       }
-    }
-    else{
-      res.send('Wrong UserID or password. Please try again.')
     }
   } catch (err) {
     res.status(500).json({ error: err?.message });

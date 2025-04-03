@@ -14,11 +14,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'pug');
 app.use(express.static('public'));
 app.use(cors());
-app.get('/', (req, res) => {
+
+app.get('/(login)?', (req, res) => {
     res.sendFile('login.html', { root: path.join(__dirname, '../public') }); // Serve login.html from the 'public' directory
 });
 
-app.post('/dashboard.html', (req, res, next) => {
+app.get('/createaccount', (req, res) => {
+    res.sendFile('createaccount.html', { root: path.join(__dirname, '../public') });
+});
+
+app.post('/dashboard', (req, res, next) => {
     console.log(req.body);
     next();
 }, user);
