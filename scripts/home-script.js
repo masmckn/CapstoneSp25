@@ -19,11 +19,11 @@ app.get('/(login)?', (req, res) => {
     res.sendFile('login.html', { root: path.join(__dirname, '../public') }); // Serve login.html from the 'public' directory
 });
 
-app.get('/createaccount', (req, res) => {
+app.get('/createaccount(.html)?', (req, res) => {
     res.sendFile('createaccount.html', { root: path.join(__dirname, '../public') });
 });
 
-app.post('/dashboard', (req, res, next) => {
+app.post('/dashboard(.html)?', (req, res, next) => {
     console.log(req.body);
     next();
 }, user);
