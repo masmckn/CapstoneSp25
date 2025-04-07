@@ -1,0 +1,399 @@
+/* ===== Global Styles ===== */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #e0e7ff, #f3f4f6);
+    display: flex;
+    justify-content: center;
+    padding: 40px 0;
+    margin: 0;
+    text-align: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+/* ===== Dashboard Styles ===== */
+.dashboard-container {
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+    width: 90%;
+    max-width: 450px;
+    backdrop-filter: blur(10px);
+}
+
+h2 {
+    color: #1f2937;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+h3 {
+    color: #374151;
+    margin-top: 20px;
+}
+
+/* Section Cards */
+.section {
+    background: #ffffff;
+    padding: 15px;
+    margin-top: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.section p {
+    font-size: 16px;
+    color: #4b5563;
+}
+
+/* Buttons (Dashboard + Login) */
+.btn,
+.pay-button,
+.support-button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 12px;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.pay-button,
+.btn-primary {
+    background-color: #2563eb;
+    color: white;
+}
+
+.pay-button:hover,
+.btn-primary:hover {
+    background-color: #1d4ed8;
+    transform: scale(1.05);
+}
+
+.support-button,
+.btn-secondary {
+    background-color: #f43f5e;
+    color: white;
+}
+
+.support-button:hover,
+.btn-secondary:hover {
+    background-color: #e11d48;
+    transform: scale(1.05);
+}
+
+/* Table Styling (Dashboard) */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 15px;
+}
+
+table, th, td {
+    border: 1px solid #e5e7eb;
+    text-align: center;
+}
+
+th, td {
+    padding: 10px;
+}
+
+th {
+    background-color: #2563eb;
+    color: white;
+}
+
+td {
+    background-color: #f9fafb;
+}
+
+/* ===== Login Page Styles ===== */
+.login-container {
+    background: #ffffff;
+    padding: 24px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 320px;
+    text-align: center;
+}
+
+.login-container h2 {
+    margin-bottom: 20px;
+    color: #1f2937;
+}
+
+.login-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input-field {
+    width: 90%;
+    max-width: 260px;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 15px;
+    box-sizing: border-box;
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 600px) {
+    .dashboard-container,
+    .login-container {
+        width: 95%;
+        padding: 20px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    h3 {
+        font-size: 18px;
+    }
+
+    .section p,
+    table {
+        font-size: 14px;
+    }
+}
+
+/* ===== Create Account Page Styles ===== */
+.register-container {
+    background: #ffffff;
+    padding: 28px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    width: 90%;
+    max-width: 450px;
+    backdrop-filter: blur(10px);
+}
+
+.register-container h2 {
+    margin-bottom: 20px;
+    color: #1f2937;
+}
+
+.input-group {
+    margin-bottom: 16px;
+    text-align: left;
+    width: 100%;
+}
+
+.input-group label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 6px;
+    color: #374151;
+    font-weight: 600;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 15px;
+    transition: 0.3s;
+    box-sizing: border-box;
+}
+
+.input-group input:focus {
+    border-color: #2563eb;
+    outline: none;
+    box-shadow: 0 0 8px rgba(37, 99, 235, 0.4);
+}
+
+.button-group {
+    margin-top: 20px;
+}
+
+.login-link {
+    margin-top: 16px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.login-link a {
+    color: #3b82f6;
+    text-decoration: none;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+/* ===== Profile Styles ===== */
+.settings-container {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 500px;
+    backdrop-filter: blur(10px);
+    margin: 40px auto;
+    text-align: center;
+}
+
+.settings-container h2 {
+    color: #1f2937;
+    margin-bottom: 20px;
+}
+
+.settings-container .section {
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.settings-container label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #374151;
+}
+
+.settings-container input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 15px;
+    transition: 0.3s;
+    box-sizing: border-box;
+}
+
+.settings-container input:focus {
+    border-color: #2563eb;
+    outline: none;
+    box-shadow: 0 0 8px rgba(37, 99, 235, 0.4);
+}
+
+/* Button Variants */
+.btn-primary {
+    background-color: #22c55e;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #16a34a;
+}
+
+.btn-secondary {
+    background-color: #ef4444;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #dc2626;
+}
+
+.btn.danger {
+    margin-top: 10px;
+}
+
+/* ===== Payment Styles ===== */
+.payment-container {
+    background: #ffffff;
+    padding: 28px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 450px;
+    backdrop-filter: blur(10px);
+    margin: 40px auto;
+    text-align: center;
+  }
+  
+  .payment-container h2 {
+    margin-bottom: 20px;
+    color: #1f2937;
+  }
+  
+  .payment-container form {
+    width: 100%;
+  }
+  
+  .input-group {
+    margin-bottom: 16px;
+    text-align: left;
+    width: 100%;
+  }
+  
+  .input-group label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 6px;
+    color: #374151;
+    font-weight: 600;
+  }
+  
+  .input-group input,
+  .input-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 15px;
+    transition: 0.3s ease;
+    box-sizing: border-box;
+  }
+  
+  .input-group input:focus,
+  .input-group select:focus {
+    border-color: #2563eb;
+    outline: none;
+    box-shadow: 0 0 8px rgba(37, 99, 235, 0.4);
+  }
+  
+  .secure-notice {
+    margin-top: 16px;
+    font-size: 14px;
+    color: #6b7280;
+  }
+  
+
+/* ===== Index Styles ===== */
+.welcome-container {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 500px;
+    margin: 40px auto;
+    text-align: center;
+  }
+  
+  .welcome-container h1 {
+    font-size: 28px;
+    color: #1f2937;
+    margin-bottom: 10px;
+  }
+  
+  .welcome-container p {
+    font-size: 16px;
+    color: #4b5563;
+    margin-bottom: 20px;
+  }
+  
+  .button-group {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .button-group a {
+    text-decoration: none;
+  }  
