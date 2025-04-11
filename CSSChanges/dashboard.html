@@ -8,6 +8,14 @@
 </head>
 <body>
 
+    <!-- Hamburger Menu -->
+    <div class="hamburger-menu">
+        <button id="hamburger-toggle">☰</button>
+        <div class="dropdown" id="dropdown-menu">
+            <a href="profile.html">Profile / Settings</a>
+        </div>
+    </div>
+
     <div class="dashboard-container">
         <h2>Welcome, [User's Name]</h2>
 
@@ -60,8 +68,23 @@
             <h3>Need Help?</h3>
             <button class="support-button">Contact Support</button>
         </div>
-
     </div>
+
+    <!-- Hamburger Menu Script -->
+    <script>
+        const toggleBtn = document.getElementById('hamburger-toggle');
+        const dropdown = document.getElementById('dropdown-menu');
+
+        toggleBtn.addEventListener('click', () => {
+            dropdown.classList.toggle('show');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!toggleBtn.contains(e.target) && !dropdown.contains(e.target)) {
+                dropdown.classList.remove('show');
+            }
+        });
+    </script>
 
 </body>
 </html>

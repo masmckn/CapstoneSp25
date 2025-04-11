@@ -397,3 +397,46 @@ td {
   .button-group a {
     text-decoration: none;
   }  
+
+/* ==== Hamburger Menu ==== */
+.hamburger-menu {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 999;
+  }
+  
+  .hamburger-menu button {
+    background-color: gray;
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    font-size: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  }
+  
+  .dropdown {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background: white;
+    border-radius: 10px;
+    padding: 10px 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    white-space: nowrap;
+  }
+  
+  .dropdown a {
+    text-decoration: none;
+    color: #1f2937;
+    font-weight: 600;
+    font-size: 15px;
+  }
+  
+  .dropdown.show {
+    display: block;
+  }
+  
