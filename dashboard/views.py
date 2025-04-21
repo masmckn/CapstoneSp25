@@ -46,7 +46,7 @@ def update_account(request):
             messages.error(request, "Please enter a valid first and last name.")
             return render(request, 'dashboard/profile.html')
 
-        # Validate passwords
+        # Match passwords
         if password != confirm_password:
             messages.error(request, "Passwords do not match!")
             return render(request, 'dashboard/profile.html')
@@ -89,3 +89,8 @@ def update_account(request):
         
         messages.success(request, "Account updated successfully!")
     return redirect('user_profile')
+
+@login_required
+def payment(request):
+    context = {}
+    return render(request, 'dashboard/payment.html', context)
