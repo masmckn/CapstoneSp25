@@ -63,10 +63,11 @@ def create_account(request):
             email=email
         )
 
-        user_profile = user.userprofile
-        user_profile.phone_number = phone
-        user_profile.address = address
-        user_profile.save()
+        UserProfile.objects.create(
+            user=user,
+            phone_number=phone,
+            address=address
+        )
 
         InsurancePolicy.objects.create(
             policynum=policy_number,

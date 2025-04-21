@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from login.views import logout_view, create_account
-from dashboard.views import user_profile, update_account
+from dashboard.views import user_profile, update_account, payment
 
 urlpatterns = [
     path('login/', include('login.urls')),
@@ -27,5 +27,6 @@ urlpatterns = [
     path('dashboard/', include('dashboard.urls')),
     path('register/', create_account, name='create_account'),
     path('profile/', user_profile, name='profile'),
-    path('profile/update/', update_account, name='update_account')
+    path('profile/update/', update_account, name='update_account'),
+    path('payment/', payment, name='payment')
 ]
