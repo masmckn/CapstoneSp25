@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+
+    <!-- Hamburger Menu -->
+    <div class="hamburger-menu">
+        <button id="hamburger-toggle">☰</button>
+        <div class="dropdown" id="dropdown-menu">
+            <a href="{% url 'profile' %}">Profile / Settings</a>
+        </div>
+    </div>
+
+    <div class="dashboard-container">
+        <h2>Welcome, {{ first_name }}</h2>
+
+        <div class="section">
+            <h3>Account Summary</h3>
+            <p><strong>Username:</strong> {{ username }}</p>
+            <p><strong>Email:</strong> {{ email }}</p>
+            <p><strong>Phone:</strong> {{ phonenum }}</p>
+        </div>
+
+        <div class="section">
+            <h3>Billing Information</h3>
+            <p><strong>Total Due:</strong> $1,250.00</p>
+            <p><strong>Last Payment:</strong> $500.00 (March 5, 2025)</p>
+            <button class="pay-button">Make a Payment</button>
+        </div>
+
+        <div class="section">
+            <h3>Insurance Details</h3>
+            <p><strong>Provider: </strong>{{ provider }}</p>
+            <p><strong>Policy Number: </strong>{{ policy }}</p>
+            <p><strong>Deductible: </strong>${{ deductible }}</p>
+        </div>
+
+        <div class="section">
+            <h3>Transaction History</h3>
+            <table>
+                <tr>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                </tr>
+                <tr>
+                    <td>March 5, 2025</td>
+                    <td>Hospital Bill Payment</td>
+                    <td>$500.00</td>
+                    <td>Paid</td>
+                </tr>
+                <tr>
+                    <td>Feb 20, 2025</td>
+                    <td>Insurance Coverage</td>
+                    <td>$750.00</td>
+                    <td>Processed</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <h3>Need Help?</h3>
+            <button class="support-button">Contact Support</button>
+        </div>
+    </div>
+
+    <!-- Hamburger Menu Script -->
+    <script>
+        const toggleBtn = document.getElementById('hamburger-toggle');
+        const dropdown = document.getElementById('dropdown-menu');
+
+        toggleBtn.addEventListener('click', () => {
+            dropdown.classList.toggle('show');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!toggleBtn.contains(e.target) && !dropdown.contains(e.target)) {
+                dropdown.classList.remove('show');
+            }
+        });
+    </script>
+</body>
+</html>
