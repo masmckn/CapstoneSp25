@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Insurance Fee Details</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #cb4c11, #cb4c11);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.95);
+      width: 90%;
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 30px;
+    }
+
+    .fee-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="number"], select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 5px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 12px;
+      background-color: #28a745;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .submit-btn:hover {
+      background-color: #218838;
+      transform: scale(1.03);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Insurance Details</h2>
+    <form action="#" method="POST">
+      <!-- Dynamic fee groups -->
+      <div class="fee-group">
+        <label for="primary">Primary Fee</label>
+        <input type="number" id="primary" name="primary_fee" placeholder="$ Amount" required>
+        <select name="primary_type">
+          <option value="copay">Copay</option>
+          <option value="coinsurance">Coinsurance</option>
+        </select>
+      </div>
+
+      <!-- REPEAT THIS BLOCK FOR EACH FEE TYPE BELOW -->
+      <!-- We'll use JS later to generate these dynamically -->
+      <script>
+        const fees = [
+          "Specialist Fee", "Other Fee", "Preventive Fee", "Diagnostic Fee", "Imaging Fee",
+          "Generic Fee", "Preferred Brand Fee", "Non-Preferred Brand Fee", "Specialty Fee",
+          "Facility Fee", "Physician Fee", "ER Fee", "Transport Fee", "Urgent Care Fee",
+          "MH Inpatient Fee", "MH Outpatient Fee", "SU Outpatient Fee", "SU Inpatient Fee",
+          "Parental Fee", "Delivery Fee", "Home Care Fee", "Rehab Fee", "Habilitation Fee",
+          "Skilled Nursing Fee", "Equipment Fee", "Hospice Fee"
+        ];
+
+        const container = document.querySelector('form');
+        fees.forEach((fee, index) => {
+          const id = fee.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z_]/g, '');
+          container.innerHTML += `
+            <div class="fee-group">
+              <label for="${id}">${fee}</label>
+              <input type="number" id="${id}" name="${id}" placeholder="$ Amount" required>
+              <select name="${id}_type">
+                <option value="copay">Copay</option>
+                <option value="coinsurance">Coinsurance</option>
+              </select>
+            </div>
+          `;
+        });
+      </script>
+
+      <button type="submit" class="submit-btn">Submit Insurance Fees</button>
+    </form>
+  </div>
+</body>
+</html>
