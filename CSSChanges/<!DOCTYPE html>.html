@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Insurance Details</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>Enter Insurance Details</h2>
+    <form action="dashboard.html" method="POST">
+      <div class="input-group">
+        <label for="provider">Insurance Provider</label>
+        <input type="text" id="provider" name="provider" required>
+      </div>
+
+      <div class="input-group">
+        <label for="policy">Policy Number</label>
+        <input type="text" id="policy" name="policy" required>
+      </div>
+
+      <div class="input-group">
+        <label for="deductible">General Deductible ($)</label>
+        <input type="number" id="deductible" name="deductible" required>
+      </div>
+
+      <div class="input-group">
+        <label for="out-of-pocket">Out-of-Pocket Limit ($)</label>
+        <input type="number" id="out-of-pocket" name="out_of_pocket" required>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit and Continue</button>
+    </form>
+  </div>
+
+</body>
+</html>

@@ -439,4 +439,50 @@ td {
   .dropdown.show {
     display: block;
   }
+
+/* ==== HInsurance Details Form ==== */
+.form-container {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 500px;
+    backdrop-filter: blur(10px);
+    margin: 40px auto;
+    text-align: center;
+  }
+  
+  .form-container h2 {
+    color: #1f2937;
+    margin-bottom: 20px;
+  }
+  
+  .input-group {
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  
+  .input-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #374151;
+  }
+  
+  .input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 15px;
+    transition: 0.3s ease;
+    box-sizing: border-box;
+  }
+  
+  .input-group input:focus {
+    border-color: #2563eb;
+    outline: none;
+    box-shadow: 0 0 8px rgba(37, 99, 235, 0.4);
+  }
   
