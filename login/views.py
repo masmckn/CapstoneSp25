@@ -10,7 +10,6 @@ def log_user(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
@@ -18,6 +17,7 @@ def log_user(request):
             return redirect(next_url)
         else:
             messages.error(request, 'Invalid username or password.')
+    else if 
     return render(request, "login/login.html")
 
 @require_POST
@@ -76,6 +76,8 @@ def create_account(request):
         )
 
         messages.success(request, "Account created successfully!")
-        return redirect('log_user')
+        return redirect('insurance_info')
 
     return render(request, 'login/createaccount.html')
+
+def
