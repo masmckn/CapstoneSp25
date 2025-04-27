@@ -17,7 +17,6 @@ def log_user(request):
             return redirect(next_url)
         else:
             messages.error(request, 'Invalid username or password.')
-    else if 
     return render(request, "login/login.html")
 
 @require_POST
@@ -79,5 +78,3 @@ def create_account(request):
         return redirect('insurance_info')
 
     return render(request, 'login/createaccount.html')
-
-def
