@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.http import require_POST
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from dashboard.models import InsurancePolicy, UserProfile
 from django.contrib import messages
 
@@ -13,7 +14,13 @@ def log_user(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            next_url = request.GET.get('next', '/dashboard/')
+            request.user.userprofile.logins = request.user.userprofile.logins + 1
+            request.user.userprofile.save()
+            logins = request.user.userprofile.logins
+            if logins > 1:
+                next_url = request.GET.get('next', '/dashboard/')
+            else:
+                next_url = '/insuranceinfo/'
             return redirect(next_url)
         else:
             messages.error(request, 'Invalid username or password.')
@@ -31,9 +38,6 @@ def create_account(request):
         last_name = request.POST.get('last_name')
         phone = request.POST.get('phone')
         email = request.POST.get('email')
-        address = request.POST.get('address')
-        insurance = request.POST.get('insurance')
-        policy_number = request.POST.get('policy_number')
         username = request.POST.get('username')
         password = request.POST.get('password')
         confirm_password = request.POST.get('confirm_password')
@@ -62,19 +66,32 @@ def create_account(request):
             email=email
         )
 
-        UserProfile.objects.create(
-            user=user,
-            phone_number=phone,
-            address=address
-        )
-
-        InsurancePolicy.objects.create(
-            policynum=policy_number,
-            provider=insurance,
-            username=user
-        )
+        profile = user.userprofile
+        profile.phone_number=phone
+        profile.logins=0
+        profile.save()
+        
 
         messages.success(request, "Account created successfully!")
-        return redirect('insurance_info')
+        return redirect('/login/')
 
     return render(request, 'login/createaccount.html')
+
+@login_required
+def insurance_info(request):
+    if request.method == 'POST':
+        provider = request.POST.get('provider')
+        policynum = request.POST.get('policy')
+        deductible = request.POST.get('deductible')
+        ooplimit = request.POST.get('out_of_pocket')
+
+        InsurancePolicy.objects.create(
+            policynum=policynum,
+            provider=provider,
+            username=request.user,
+            generaldeductible=deductible,
+            ooplimit=ooplimit
+        )
+
+        return redirect('/dashboard/')
+    return render(request, 'login/insuranceinfo.html')

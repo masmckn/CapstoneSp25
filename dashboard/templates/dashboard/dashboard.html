@@ -14,6 +14,7 @@
         <button id="hamburger-toggle">☰</button>
         <div class="dropdown" id="dropdown-menu">
             <a href="{% url 'profile' %}">Profile / Settings</a>
+            <div><a href="{% url 'insurance_details' %}">Insurance Details</a></div>
         </div>
     </div>
 
@@ -29,8 +30,9 @@
 
         <div class="section">
             <h3>Billing Information</h3>
-            <p><strong>Total Due:</strong> $1,250.00</p>
-            <p><strong>Last Payment:</strong> $500.00 (March 5, 2025)</p>
+            <p><strong>Total Due:</strong> ${{ total_due }}</p>
+            <p><strong>Last Payment:</strong> ${{ last_payment.amount|default:0 }} 
+                {% if last_payment %} ({{ last_payment.day_paid }}) {% endif %}</p>
             <a href="{% url 'payment' %}"><button class="pay-button">Make a Payment</button></a>
         </div>
 
@@ -43,32 +45,28 @@
 
         <div class="section">
             <h3>Transaction History</h3>
-            <table>
-                <tr>
-                    <th>Date</th>
-                    <th>Description</th>
-                    <th>Amount</th>
-                    <th>Status</th>
-                </tr>
-                <tr>
-                    <td>March 5, 2025</td>
-                    <td>Hospital Bill Payment</td>
-                    <td>$500.00</td>
-                    <td>Paid</td>
-                </tr>
-                <tr>
-                    <td>Feb 20, 2025</td>
-                    <td>Insurance Coverage</td>
-                    <td>$750.00</td>
-                    <td>Processed</td>
-                </tr>
-            </table>
+            {% if past_payments %}
+                <table>
+                    <tr>
+                        <th>Date</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                    </tr>
+                    {% for payment in past_payments.all|slice:":3" %}
+                        <tr>
+                            <td>{{ payment.day_paid|date:"F j, Y" }}</td>
+                            <td>{{ payment.receiver }}</td>
+                            <td>${{ payment.amount|floatformat:2 }}</td>
+                            <td>{% if payment.day_processed %}Processed{% else %}Paid{% endif %}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <p>No payments have been made yet!</p>
+            {% endif %}
         </div>
-
-        <div class="section">
-            <h3>Need Help?</h3>
-            <button class="support-button">Contact Support</button>
-        </div>
+        
     </div>
 
     <!-- Hamburger Menu Script -->

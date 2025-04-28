@@ -72,6 +72,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone_number = models.CharField(max_length=15, blank=True, null=True)
     address = models.CharField(max_length=255, blank=True, null=True)
+    logins = models.BigIntegerField(db_column='logins', blank=True, null=True)
 
     class Meta:
         db_table = 'userprofile'
@@ -85,6 +86,18 @@ class Payment(models.Model):
     day_paid = models.DateField() # Date field for when the payment was made
     day_processed = models.DateField(null=True, blank=True) # Date field for when the payment was processed
     username = models.ForeignKey(User, on_delete=models.CASCADE, to_field='username', db_column='username', null=True, blank=True)
+    receiver = models.CharField(max_length=255)
 
     class Meta:
         db_table = 'payment'
+
+class Expense(models.Model):
+    caretype = models.CharField(max_length=25)
+    amtdue = models.IntegerField()
+    duedate = models.DateField()
+    debtsource = models.CharField(max_length=255)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    payment_id = models.ForeignKey(Payment, on_delete=models.CASCADE, to_field='id', db_column='payment_id', null=True, blank=True)
+
+    class Meta:
+        db_table = 'expense'

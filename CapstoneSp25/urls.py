@@ -16,8 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from login.views import logout_view, create_account
-from dashboard.views import user_profile, update_account, payment
+from login.views import logout_view, create_account, insurance_info
+from dashboard.views import user_profile, change_pass, payment, delete_account, insurance_details
 
 urlpatterns = [
     path('login/', include('login.urls')),
@@ -27,6 +27,9 @@ urlpatterns = [
     path('dashboard/', include('dashboard.urls')),
     path('register/', create_account, name='create_account'),
     path('profile/', user_profile, name='profile'),
-    path('profile/update/', update_account, name='update_account'),
-    path('payment/', payment, name='payment')
+    path('profile/update/', change_pass, name='change_pass'),
+    path('payment/', payment, name='payment'),
+    path('insuranceinfo/', insurance_info, name='insurance_info'),
+    path('deleteaccount/', delete_account, name='delete_account'),
+    path('insurancedetails/', insurance_details, name='insurance_details'),
 ]

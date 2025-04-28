@@ -7,7 +7,7 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: linear-gradient(to right, #cb4c11, #cb4c11);
+      background: linear-gradient(to right, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95));
       margin: 0;
       padding: 0;
       display: flex;
@@ -73,46 +73,49 @@
 <body>
   <div class="container">
     <h2>Insurance Details</h2>
-    <form action="#" method="POST">
+
+    <form method="POST">
+      {% csrf_token %}
       <!-- Dynamic fee groups -->
       <div class="fee-group">
-        <label for="primary">Primary Fee</label>
-        <input type="number" id="primary" name="primary_fee" placeholder="$ Amount" required>
+        <label for="primary">Primary Care Physician Fee</label>
+        <input type="number" id="primary" name="primary_fee" value="{{ primaryfee }}" required>
         <select name="primary_type">
           <option value="copay">Copay</option>
           <option value="coinsurance">Coinsurance</option>
         </select>
       </div>
 
-      <!-- REPEAT THIS BLOCK FOR EACH FEE TYPE BELOW -->
       <!-- We'll use JS later to generate these dynamically -->
       <script>
         const fees = [
-          "Specialist Fee", "Other Fee", "Preventive Fee", "Diagnostic Fee", "Imaging Fee",
-          "Generic Fee", "Preferred Brand Fee", "Non-Preferred Brand Fee", "Specialty Fee",
-          "Facility Fee", "Physician Fee", "ER Fee", "Transport Fee", "Urgent Care Fee",
-          "MH Inpatient Fee", "MH Outpatient Fee", "SU Outpatient Fee", "SU Inpatient Fee",
-          "Parental Fee", "Delivery Fee", "Home Care Fee", "Rehab Fee", "Habilitation Fee",
-          "Skilled Nursing Fee", "Equipment Fee", "Hospice Fee"
+          "Specialist Fee", "Other Physician Fee", "Preventive Care Fee", "Diagnostic Care Fee", "Imaging Fee",
+          "Generic Prescription Fee", "Preferred Brand Prescription Fee", "Non-Preferred Brand Prescription Fee",
+          "Specialty Fee", "Facility Care Fee", "ER Fee", "Transport Fee", "Urgent Care Fee",
+          "Mental Healthcare Inpatient Fee", "Mental Healthcare Outpatient Fee", "Substance Use Outpatient Fee", "Substance Use Inpatient Fee",
+          "Prenatal Care Fee", "Birth Delivery Fee", "Home Care Fee", "Rehabilitation Facility Fee", "Habilitation Fee",
+          "Skilled Nursing Fee", "Equipment Fee", "Hospice Care Fee"
         ];
 
+        const feeValues = JSON.parse('{{ fee_values_json|escapejs }}');
         const container = document.querySelector('form');
         fees.forEach((fee, index) => {
           const id = fee.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z_]/g, '');
+          const entry = feeValues[id] || '';
           container.innerHTML += `
             <div class="fee-group">
               <label for="${id}">${fee}</label>
-              <input type="number" id="${id}" name="${id}" placeholder="$ Amount" required>
+              <input type="number" id="${id}" name="${id}" value="${entry.value}">
               <select name="${id}_type">
-                <option value="copay">Copay</option>
-                <option value="coinsurance">Coinsurance</option>
+                <option value="copay" ${entry.type === 'copay' ? 'selected' : ''}>Copay</option>
+                <option value="coinsurance" ${entry.type === 'coinsurance' ? 'selected' : ''}>Coinsurance</option>
               </select>
             </div>
           `;
         });
       </script>
 
-      <button type="submit" class="submit-btn">Submit Insurance Fees</button>
+      <a href="{% url 'insurance_details' %}"><button type="submit" class="submit-btn">Submit Insurance Fees</button></a>
     </form>
   </div>
 </body>

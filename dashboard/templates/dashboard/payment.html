@@ -12,10 +12,11 @@
   <div class="payment-container">
     <h2>Make a Payment</h2>
     
-    <form>
+    <form method="POST">
+      {% csrf_token %}
       <div class="input-group">
-        <label for="amount">Total Amount Due</label>
-        <input type="text" id="amount" name="amount" value="$1,250.00" readonly>
+        <label for="amount">Payment Amount ($)</label>
+        <input type="text" id="amount" name="amount" placeholder="Amount" required>
       </div>
 
       <div class="input-group">
@@ -34,7 +35,7 @@
 
       <div class="input-group">
         <label for="expiry">Expiry Date</label>
-        <input type="month" id="expiry" name="expiry" required>
+        <input type="month" id="expiry" name="expiry" placeholder="01/23" required>
       </div>
 
       <div class="input-group">

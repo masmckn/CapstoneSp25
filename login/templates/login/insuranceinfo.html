@@ -4,78 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Insurance Details</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to right, #cb5b11, #cb5b11);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      margin: 0;
-    }
-
-    .form-container {
-      background: rgba(255, 255, 255, 0.95);
-      padding: 30px;
-      width: 90%;
-      max-width: 500px;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-      text-align: center;
-      backdrop-filter: blur(10px);
-    }
-
-    h2 {
-      color: #333;
-      margin-bottom: 20px;
-    }
-
-    .input-group {
-      margin-bottom: 20px;
-      text-align: left;
-    }
-
-    label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 6px;
-      color: #444;
-    }
-
-    input {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 15px;
-    }
-
-    .btn-submit {
-      width: 100%;
-      padding: 12px;
-      background-color: #28a745;
-      border: none;
-      color: white;
-      font-size: 16px;
-      font-weight: bold;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: 0.3s;
-      margin-top: 10px;
-    }
-
-    .btn-submit:hover {
-      background-color: #218838;
-      transform: scale(1.05);
-    }
-  </style>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
 
   <div class="form-container">
     <h2>Enter Insurance Details</h2>
-    <form action="dashboard.html" method="POST">
+    <form method="POST">
+      {% csrf_token %}
       <div class="input-group">
         <label for="provider">Insurance Provider</label>
         <input type="text" id="provider" name="provider" required>
