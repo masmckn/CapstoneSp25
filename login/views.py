@@ -95,3 +95,9 @@ def insurance_info(request):
 
         return redirect('/dashboard/')
     return render(request, 'login/insuranceinfo.html')
+
+@login_required
+@require_POST
+def log_out(request):
+    logout(request)
+    return redirect('/login/')

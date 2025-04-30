@@ -15,6 +15,14 @@
         <div class="dropdown" id="dropdown-menu">
             <a href="{% url 'profile' %}">Profile / Settings</a>
             <div><a href="{% url 'insurance_details' %}">Insurance Details</a></div>
+            <div>
+                <form id="logout-form" method="post" action="{% url 'log_out' %}" style="display: none;">
+                    {% csrf_token %}
+                </form>
+                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    Logout
+                </a>
+            </div>
         </div>
     </div>
 
@@ -31,6 +39,8 @@
         <div class="section">
             <h3>Billing Information</h3>
             <p><strong>Total Due:</strong> ${{ total_due }}</p>
+            <p><strong>Next Payment Due:</strong> ${{ soonest_oop|default:0 }}
+                {% if soonest_expense %} to {{soonest_expense.debtsource}} ({{soonest_expense.duedate}}) {% endif %}</p>
             <p><strong>Last Payment:</strong> ${{ last_payment.amount|default:0 }} 
                 {% if last_payment %} ({{ last_payment.day_paid }}) {% endif %}</p>
             <a href="{% url 'payment' %}"><button class="pay-button">Make a Payment</button></a>

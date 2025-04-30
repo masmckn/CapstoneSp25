@@ -46,12 +46,16 @@ def dashboard(request):
     total_due = 0
     past_payments = None
     last_payment = None
+    soonest_expense = None
+    soonest_oop = 0
 
     if request.user.expense_set.exists():
         expense_list = request.user.expense_set.all()
-
         for expense in expense_list:
             if not expense.payment_id:
+                if soonest_expense:
+                    if expense.duedate < soonest_expense.duedate: soonest_expense = expense
+                else: soonest_expense = expense
                 # Get the corresponding insurance fields for this expense type
                 fee_field, type_field = insurance_mapping.get(expense.caretype, (None, None))
                 
@@ -67,7 +71,7 @@ def dashboard(request):
                         out_of_pocket = expense.amtdue * (Decimal(coverage_amount) / Decimal('100'))
                     
                     total_due += out_of_pocket
-
+                    if soonest_expense == expense: soonest_oop = out_of_pocket
     if request.user.payment_set.exists():
         past_payments = request.user.payment_set.order_by('-day_paid')
         # Get the last payment if there are any payments
@@ -75,7 +79,8 @@ def dashboard(request):
     context = {'username': request.user.username, 'email': request.user.email, 'first_name': request.user.first_name,
                'phonenum': request.user.userprofile.phone_number, 'provider': insurance.provider,
                'policy': insurance.policynum, 'deductible': insurance.generaldeductible, 'past_payments': past_payments,
-               'expense_list': expense_list, 'total_due': total_due, 'last_payment': last_payment}
+               'expense_list': expense_list, 'total_due': total_due, 'last_payment': last_payment, 
+               'soonest_expense': soonest_expense, 'soonest_oop': soonest_oop}
     return render(request, 'dashboard/dashboard.html', context)
 
 @login_required
@@ -140,7 +145,7 @@ def payment(request):
                     out_of_pocket = max(0, coverage_amount)
                 else:  # coinsurance
                     # For coinsurance, calculate percentage (coverage_amount is the percentage)
-                    out_of_pocket = expense.amtdue * (coverage_amount / 100.0)
+                    out_of_pocket = expense.amtdue * (Decimal(coverage_amount) / Decimal('100'))
                 
                 oopcost += out_of_pocket
 

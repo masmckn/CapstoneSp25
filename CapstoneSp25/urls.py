@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from login.views import logout_view, create_account, insurance_info
+from login.views import logout_view, create_account, insurance_info, log_out
 from dashboard.views import user_profile, change_pass, payment, delete_account, insurance_details
 
 urlpatterns = [
@@ -32,4 +32,5 @@ urlpatterns = [
     path('insuranceinfo/', insurance_info, name='insurance_info'),
     path('deleteaccount/', delete_account, name='delete_account'),
     path('insurancedetails/', insurance_details, name='insurance_details'),
+    path('logout/', log_out, name="log_out")
 ]

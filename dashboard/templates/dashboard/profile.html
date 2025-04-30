@@ -8,7 +8,9 @@
   <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
-
+  <a href="{% url 'dashboard' %}" style="position: fixed; top: 30px; left: 30px; text-decoration: none; color: #333; font-size: 16px; display: inline-flex; align-items: center; z-index: 100;">
+    <span style="font-size: 20px; margin-right: 8px; line-height: 1;">←</span> Return to Dashboard
+  </a>
   <div class="settings-container">
     <h2>User Profile & Settings</h2>
     
