@@ -94,7 +94,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'Capstone',
         'USER': 'root',
-        # 'PASSWORD': 'YOURPASSWORD'
+        'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '3306',
     }
